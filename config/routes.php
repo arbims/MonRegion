@@ -50,6 +50,16 @@ return function (RouteBuilder $routes): void {
     $routes->setRouteClass(DashedRoute::class);
 
     $routes->scope('/', function (RouteBuilder $builder): void {
+
+        $builder->get('/mdecins', ['controller' => 'Mdecins', 'action' => 'index']);
+        $builder->get('/mdecins/view/{id}', ['controller' => 'Mdecins', 'action' => 'view'])->setPass(['id']);
+        $builder->connect('/mdecins/add', ['controller' => 'Mdecins', 'action' => 'add']);
+        $builder->connect('/mdecins/edit/{id}', ['controller' => 'Mdecins', 'action' => 'edit'])->setPass(['id']);
+        $builder->connect('/mdecins/delete/{id}', ['controller' => 'Mdecins', 'action' => 'delete'])->setPass(['id']);
+        $builder->connect('/mdecins/getDepartement', ['controller' => 'Mdecins', 'action' => 'getDepartement']);
+        $builder->connect('/mdecins/getVille', ['controller' => 'Mdecins', 'action' => 'getVille']);
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+
         /*
          * Here, we are connecting '/' (base path) to a controller called 'Pages',
          * its action called 'display', and we pass a param to select the view file
@@ -75,7 +85,7 @@ return function (RouteBuilder $routes): void {
          * You can remove these routes once you've connected the
          * routes you want in your application.
          */
-        $builder->fallbacks();
+        //$builder->fallbacks();
     });
 
     /*
